@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Pikernot</Authors>
+        <Version>$(Version)</Version>
+        <PackageId>MyTaxClient</PackageId>
+        <Title>MyTaxClient - клиент для API сервиса "Мой налог"</Title>
+        <Description>Клиент для работы с API сервиса "Мой налог" от ФНС РФ для самозанятых. Позволяет автоматически регистрировать и аннулировать чеки.</Description>
+        <PackageProjectUrl>https://github.com/Pikernot/MyTaxClient</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Pikernot/MyTaxClient.git</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>nalog;tax;mytax;фнс;мойналог</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+      <PackageReference Include="MinVer" Version="6.1.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="MyTaxClient.Authorization.cs">
+        <DependentUpon>MyTaxClient.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>

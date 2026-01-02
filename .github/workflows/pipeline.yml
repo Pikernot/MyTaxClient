@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Pack
+        run: dotnet pack --configuration Release --output ./artifacts
+
+      - name: IAM Token
+        id: issue-iam-token
+        uses: yc-actions/yc-iam-token@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - name: Configure NuGet credentials
+        run: dotnet nuget add source --username iam --password ${{ steps.issue-iam-token.outputs.token }} --store-password-in-clear-text --name yandex-cloud-registry "https://registry.yandexcloud.net/nuget/v3/${{ secrets.YANDEX_REGISTRY_ID }}/index.json"
+
+      - name: Publish to Yandex Cloud Registry
+        run: dotnet nuget push ./artifacts/*.nupkg --source yandex-cloud-registry --skip-duplicate
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
