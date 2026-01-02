@@ -29,10 +29,10 @@ public static class DependencyInjectionExtensions
             options =>
                 !string.IsNullOrWhiteSpace(options.Username) &&
                 !string.IsNullOrWhiteSpace(options.Password),
-            $"{nameof(MyTaxClient)} requires {nameof(MyTaxClientOptions.Username)} and {nameof(MyTaxClientOptions.Password)} to be configured.");
+            $"{nameof(MyTaxReceiptsClient)} requires {nameof(MyTaxClientOptions.Username)} and {nameof(MyTaxClientOptions.Password)} to be configured.");
         optionsBuilder.ValidateOnStart();
         
-        services.AddSingleton<MyTaxClient>();
+        services.AddSingleton<MyTaxReceiptsClient>();
         return services;
     }
 }

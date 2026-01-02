@@ -29,8 +29,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="MyTaxClient.Authorization.cs">
-        <DependentUpon>MyTaxClient.cs</DependentUpon>
+      <Compile Update="MyTaxReceiptsClient.Authorization.cs">
+        <DependentUpon>MyTaxReceiptsClient.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -3,7 +3,7 @@ using MyTaxClient.Models.Dto.Authorization;
 
 namespace MyTaxClient;
 
-public partial class MyTaxClient
+public partial class MyTaxReceiptsClient
 {
     private string? _authToken;
     private DateTimeOffset _authTokenExpiresAt;

@@ -59,6 +59,7 @@ builder.Services.AddMyTaxClient(configure: options =>
 
 ### Регистрация чека
 ```csharp
+var myTaxClient = services.GetRequiredService<MyTaxReceiptsClient>();
 await myTaxClient.ApproveReceipt(new ApproveReceiptRequest
 {
     Services = [ new Service(Name: "Услуга1", Quantity: 1, Amount: 100.00M) ],
@@ -68,6 +69,7 @@ await myTaxClient.ApproveReceipt(new ApproveReceiptRequest
 
 ### Аннулирование чека
 ```csharp
+var myTaxClient = services.GetRequiredService<MyTaxReceiptsClient>();
 await myTaxClient.CancelReceipt(new CancelReceiptRequest
 {
     ReceiptUuid = "tv8aiukhu3"

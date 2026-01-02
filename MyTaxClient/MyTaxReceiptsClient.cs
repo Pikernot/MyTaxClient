@@ -10,10 +10,10 @@ using MyTaxClient.Models.Dto.Authorization;
 
 namespace MyTaxClient;
 
-public partial class MyTaxClient(
+public partial class MyTaxReceiptsClient(
     IOptions<MyTaxClientOptions> options,
     TimeProvider time,
-    ILogger<MyTaxClient> logger)
+    ILogger<MyTaxReceiptsClient> logger)
 {
     public async Task<ApproveReceiptResult> ApproveReceipt(ApproveReceiptRequest request, CancellationToken ct = default)
     {
