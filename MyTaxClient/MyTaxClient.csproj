@@ -14,6 +14,7 @@
         <RepositoryUrl>https://github.com/Pikernot/MyTaxClient.git</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>nalog;tax;mytax;фнс;мойналог</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -31,6 +32,10 @@
       <Compile Update="MyTaxClient.Authorization.cs">
         <DependentUpon>MyTaxClient.cs</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
