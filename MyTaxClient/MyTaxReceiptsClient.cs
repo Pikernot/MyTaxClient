@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyTaxClient.Models;
@@ -12,10 +13,11 @@ namespace MyTaxClient;
 
 public partial class MyTaxReceiptsClient(
     IOptions<MyTaxClientOptions> options,
-    ILogger<MyTaxReceiptsClient>? logger)
+    IServiceProvider services)
 {
     public async Task<ApproveReceiptResult> ApproveReceipt(ApproveReceiptRequest request, CancellationToken ct = default)
     {
+        var logger = services.GetService<ILogger<MyTaxReceiptsClient>>();
         try
         {
             await EnsureAuthorized(ct);
@@ -61,6 +63,7 @@ public partial class MyTaxReceiptsClient(
     
     public async Task<CancelReceiptResult> CancelReceipt(CancelReceiptRequest request, CancellationToken ct = default)
     {
+        var logger = services.GetService<ILogger<MyTaxReceiptsClient>>();
         try
         {
             await EnsureAuthorized(ct);
