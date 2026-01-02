@@ -12,8 +12,7 @@ namespace MyTaxClient;
 
 public partial class MyTaxReceiptsClient(
     IOptions<MyTaxClientOptions> options,
-    TimeProvider time,
-    ILogger<MyTaxReceiptsClient> logger)
+    ILogger<MyTaxReceiptsClient>? logger)
 {
     public async Task<ApproveReceiptResult> ApproveReceipt(ApproveReceiptRequest request, CancellationToken ct = default)
     {
@@ -22,12 +21,11 @@ public partial class MyTaxReceiptsClient(
             await EnsureAuthorized(ct);
             var client = _http.Value;
 
-            var now = time.GetUtcNow();
             using var requestMessage = new HttpRequestMessage(HttpMethod.Post, "income");
             requestMessage.Content = JsonContent.Create(new IncomeRequest
             {
                 OperationTime = request.PaymentTime.ToString(TimeFormat),
-                RequestTime = now.ToString(TimeFormat),
+                RequestTime = DateTimeOffset.UtcNow.ToString(TimeFormat),
                 Services = request.Services.ToList()
             }, null, JsonOptions);
 
@@ -38,7 +36,7 @@ public partial class MyTaxReceiptsClient(
             using var response = await client.SendAsync(requestMessage, ct);
             if (response.IsSuccessStatusCode is false)
             {
-                logger.LogError("MyTax: An error occured trying to approve receipt: {StatusCode} {MyTaxResponseText}.", response.StatusCode, await response.Content.ReadAsStringAsync(ct));
+                logger?.LogError("MyTax: An error occured trying to approve receipt: {StatusCode} {MyTaxResponseText}.", response.StatusCode, await response.Content.ReadAsStringAsync(ct));
                 return new ApproveReceiptResult(false, null, null);
             }
 
@@ -46,7 +44,7 @@ public partial class MyTaxReceiptsClient(
             var myTaxResponse = JsonSerializer.Deserialize<IncomeResponse>(responseJson, JsonOptions)!;
             
             var responseString = $"{response.StatusCode}\n{responseJson}";
-            logger.LogInformation("MyTax: Receipt approved. UUID: {ReceiptUuid}. MyTax response: {Response}",
+            logger?.LogInformation("MyTax: Receipt approved. UUID: {ReceiptUuid}. MyTax response: {Response}",
                 myTaxResponse.ApprovedReceiptUuid, responseString);
             
             return new ApproveReceiptResult(
@@ -56,7 +54,7 @@ public partial class MyTaxReceiptsClient(
         }
         catch (Exception e)
         {
-            logger.LogError(e, "MyTax: An error occured trying to approve receipt.");
+            logger?.LogError(e, "MyTax: An error occured trying to approve receipt.");
             return new ApproveReceiptResult(false, null, null);
         }
     }
@@ -68,14 +66,13 @@ public partial class MyTaxReceiptsClient(
             await EnsureAuthorized(ct);
             var client = _http.Value;
 
-            var now = time.GetUtcNow();
-            var nowString = now.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            var now = DateTimeOffset.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
 
             using var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/cancel");
             requestMessage.Content = JsonContent.Create(new CancelRequest(
                 request.ReceiptUuid,
                 request.CancellationTime.ToString(TimeFormat),
-                nowString,
+                now,
                 request.CancelReason), null, JsonOptions);
 
             requestMessage.Headers.Authorization =
@@ -86,13 +83,13 @@ public partial class MyTaxReceiptsClient(
 
             var responseString = await response.Content.ReadAsStringAsync(ct);
             var responseContent = $"{response.StatusCode}\n{responseString}";
-            logger.LogInformation("MyTax: Receipt canceled. UUID: {ReceiptUuid}. Full response: {Response}",
+            logger?.LogInformation("MyTax: Receipt canceled. UUID: {ReceiptUuid}. Full response: {Response}",
                 request.ReceiptUuid, responseString);
             return new CancelReceiptResult(response.IsSuccessStatusCode, responseContent);
         }
         catch (Exception e)
         {
-            logger.LogError(e, "MyTax: An error occured trying to cancel receipt with UUID: {ReceiptUuid}.",
+            logger?.LogError(e, "MyTax: An error occured trying to cancel receipt with UUID: {ReceiptUuid}.",
                 request.ReceiptUuid);
             return new CancelReceiptResult(false, null);
         }
