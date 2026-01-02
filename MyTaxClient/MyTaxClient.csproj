@@ -8,8 +8,8 @@
         <Authors>Pikernot</Authors>
         <Version>$(Version)</Version>
         <PackageId>MyTaxClient</PackageId>
-        <Title>MyTaxClient - клиент для API сервиса "Мой налог"</Title>
-        <Description>Клиент для работы с API сервиса "Мой налог" от ФНС РФ для самозанятых. Позволяет автоматически регистрировать и аннулировать чеки.</Description>
+        <Title>MyTaxClient - API-клиент сервиса "Мой налог"</Title>
+        <Description>Клиент для работы с API сервиса "Мой налог" от ФНС РФ для самозанятых. Позволяет автоматизировать регистрацию и аннулирование чеков.</Description>
         <PackageProjectUrl>https://github.com/Pikernot/MyTaxClient</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Pikernot/MyTaxClient.git</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

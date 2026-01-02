@@ -1,6 +1,6 @@
-# MyTaxClient – клиент "Мой налог" [![NuGet](https://img.shields.io/nuget/v/MyTaxClient.svg)](https://www.nuget.org/packages/MyTaxClient)
+# MyTaxClient – API-клиент сервиса "Мой налог" от ФНС [![NuGet](https://img.shields.io/nuget/v/MyTaxClient.svg)](https://www.nuget.org/packages/MyTaxClient)
 
-Клиент для работы с API сервиса "Мой налог" от ФНС РФ для самозанятых. Позволяет автоматически регистрировать и аннулировать чеки.
+Клиент для работы с API сервиса "Мой налог" от ФНС РФ для самозанятых. Позволяет автоматизировать регистрацию и аннулирование чеков.
 
 ## Быстрый старт
 
