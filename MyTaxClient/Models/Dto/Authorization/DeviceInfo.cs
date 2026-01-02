@@ -1,11 +1,11 @@
 ﻿namespace MyTaxClient.Models.Dto.Authorization;
 
-internal record DeviceInfo
+public record DeviceInfo
 {
-    internal required string AppVersion { get; init; }
-    internal required string SourceType { get; init; }
-    internal required string SourceDeviceId { get; init; }
-    internal required DeviceInfoMetaDetails MetaDetails { get; init; }
+    public required string AppVersion { get; init; }
+    public required string SourceType { get; init; }
+    public required string SourceDeviceId { get; init; }
+    public required DeviceInfoMetaDetails MetaDetails { get; init; }
     
-    internal record DeviceInfoMetaDetails(string UserAgent);
+    public record DeviceInfoMetaDetails(string UserAgent);
 }

@@ -1,3 +1,3 @@
 ﻿namespace MyTaxClient.Models.Dto;
 
-internal record IncomeResponse(string ApprovedReceiptUuid);
+public record IncomeResponse(string ApprovedReceiptUuid);

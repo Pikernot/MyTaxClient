@@ -1,13 +1,13 @@
 ﻿namespace MyTaxClient.Models.Dto.Authorization;
 
-internal record AuthResponse
+public record AuthResponse
 {
-    internal required string Token { get; init; }
-    internal required DateTimeOffset TokenExpireIn { get; init; }
-    internal required string RefreshToken { get; init; }
-    internal UserProfile? Profile { get; init; }
+    public required string Token { get; init; }
+    public required DateTimeOffset TokenExpireIn { get; init; }
+    public required string RefreshToken { get; init; }
+    public UserProfile? Profile { get; init; }
         
-    internal record UserProfile(
+    public record UserProfile(
         string? LastName,
         long? Id,
         string? DisplayName,

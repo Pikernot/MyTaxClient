@@ -1,6 +1,6 @@
 ﻿namespace MyTaxClient.Models.Dto.Authorization;
 
-internal readonly record struct LoginRequest(
+public readonly record struct LoginRequest(
     string Username,
     string Password,
     DeviceInfo DeviceInfo);
