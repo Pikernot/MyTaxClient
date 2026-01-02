@@ -59,10 +59,10 @@ builder.Services.AddMyTaxClient(configure: options =>
 
 ### Регистрация чека
 ```csharp
-await myTaxClient.ApproveReceiptAsync(new ApproveReceiptRequest
+await myTaxClient.ApproveReceipt(new ApproveReceiptRequest
 {
-    Services: [ new Service(Name: "Услуга1", Quantity: 1, Amount: 100.00M) ],
-    PaymentTime: DateTimeOffset.UtcNow
+    Services = [ new Service(Name: "Услуга1", Quantity: 1, Amount: 100.00M) ],
+    PaymentTime = DateTimeOffset.UtcNow
 });
 ```
 
@@ -70,7 +70,7 @@ await myTaxClient.ApproveReceiptAsync(new ApproveReceiptRequest
 ```csharp
 await myTaxClient.CancelReceipt(new CancelReceiptRequest
 {
-    ReceiptUuid: "tv8aiukhu3"
-    CancellationTime: DateTimeOffset.UtcNow
+    ReceiptUuid = "tv8aiukhu3"
+    CancellationTime = DateTimeOffset.UtcNow
 });
 ```

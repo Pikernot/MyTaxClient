@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Pikernot</Authors>
-        <Version>$(Version)</Version>
+        <MinVerTagPrefix>v</MinVerTagPrefix>
         <PackageId>MyTaxClient</PackageId>
         <Title>MyTaxClient - API-клиент сервиса "Мой налог"</Title>
         <Description>Клиент для работы с API сервиса "Мой налог" от ФНС РФ для самозанятых. Позволяет автоматизировать регистрацию и аннулирование чеков.</Description>
